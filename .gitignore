@@ -1,0 +1,9 @@
+# Ignore venv
+/venv
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore database
+src/instance/
