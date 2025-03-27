@@ -21,4 +21,4 @@ def post_student(data):
         logging.error(err)
         return make_response(
             {"message": f"Failed to add new student: {err}"}, 
-            400)
+            500)

@@ -21,4 +21,4 @@ def post_professor(data):
         logging.error(err)
         return make_response(
             {"message": f"Failed to add new professor: {err}"}, 
-            400)
+            500)
