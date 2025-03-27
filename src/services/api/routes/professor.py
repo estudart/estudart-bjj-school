@@ -2,7 +2,11 @@ import logging
 
 from flask import Blueprint, request as req
 
-from services.api.controllers.professor import post_professor, get_professor_by_name
+from services.api.controllers.professor import (
+    post_professor, 
+    get_professor_by_name, 
+    get_professor_by_id
+)
 
 
 bp_professor = Blueprint("professor",
@@ -24,6 +28,12 @@ def register_professor():
        default: 'Ricardo'
        required: True
        description: Name of the Professor
+     - name: nick_name
+       in: query
+       type: string
+       default: 'Ricardinho'
+       required: True
+       description: Nickname of the Professor
      - name: age
        in: query
        type: integer
@@ -84,3 +94,27 @@ def read_professor_by_name(name):
             
     """
     return get_professor_by_name(name)
+
+
+@bp_professor.route("/get-professor-by-id/<id>", methods=["GET"])
+def read_professor_by_id(id):
+    """
+    Register Professor
+    ---
+    tags:
+     - Professor
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 2
+       required: True
+       description: Id of the Professor
+    
+    responses:
+        200:
+            description: New Professor was registered
+            
+    """
+    return get_professor_by_id(id)
