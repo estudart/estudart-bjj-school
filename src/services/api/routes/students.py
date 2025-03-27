@@ -5,7 +5,9 @@ from flask import Blueprint, request as req
 from services.api.controllers.student import (
     post_student, 
     get_student_by_name,
-    get_student_by_id
+    get_student_by_id,
+    delete_student_by_name,
+    delete_student_by_id
 )
 
 bp_student = Blueprint("student", 
@@ -23,9 +25,15 @@ def register_student():
      - name: name
        in: query
        type: string
-       default: 'Erico'
+       default: 'Erico Correia Studart'
        required: True
        description: Name of the student
+     - name: nick_name
+       in: query
+       type: string
+       default: 'Bigode'
+       required: True
+       description: Nickname of the student
      - name: age
        in: query
        type: integer
@@ -62,7 +70,7 @@ def register_student():
 @bp_student.route("/get-student-by-name/<name>", methods=["GET"])
 def read_student_by_name(name):
     """
-    Register Student
+    Get Student
     ---
     tags:
      - Student
@@ -71,7 +79,7 @@ def read_student_by_name(name):
      - name: name
        in: path
        type: string
-       default: 'Erico'
+       default: 'Erico Correia Studart'
        required: True
        description: Name of the student
     
@@ -86,7 +94,7 @@ def read_student_by_name(name):
 @bp_student.route("/get-student-by-id/<id>", methods=["GET"])
 def read_student_by_id(id):
     """
-    Register Student
+    Get Student
     ---
     tags:
      - Student
@@ -105,3 +113,51 @@ def read_student_by_id(id):
             
     """
     return get_student_by_id(id)
+
+
+@bp_student.route("/delete-student-by-name/<name>", methods=["DELETE"])
+def delete_student_given_name(name):
+    """
+    Delete Student
+    ---
+    tags:
+     - Student
+
+    parameters:
+     - name: name
+       in: path
+       type: string
+       default: 'Erico Correia Studart'
+       required: True
+       description: name of the student
+    
+    responses:
+        200:
+            description: Student was deleted
+            
+    """
+    return delete_student_by_name(name)
+
+
+@bp_student.route("/delete-student-by-id/<id>", methods=["DELETE"])
+def delete_student_given_id(id):
+    """
+    Delete Student
+    ---
+    tags:
+     - Student
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the student
+    
+    responses:
+        200:
+            description: Student was deleted
+            
+    """
+    return delete_student_by_id(id)
