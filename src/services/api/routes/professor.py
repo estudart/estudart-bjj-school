@@ -5,7 +5,9 @@ from flask import Blueprint, request as req
 from services.api.controllers.professor import (
     post_professor, 
     get_professor_by_name, 
-    get_professor_by_id
+    get_professor_by_id,
+    delete_professor_by_name,
+    delete_professor_by_id
 )
 
 
@@ -25,14 +27,14 @@ def register_professor():
      - name: name
        in: query
        type: string
-       default: 'Ricardo'
+       default: 'Ricardo Nieira'
        required: True
        description: Name of the Professor
      - name: nick_name
        in: query
        type: string
        default: 'Ricardinho'
-       required: True
+       required: False
        description: Nickname of the Professor
      - name: age
        in: query
@@ -84,7 +86,7 @@ def read_professor_by_name(name):
      - name: name
        in: path
        type: string
-       default: 'Ricardo'
+       default: 'Ricardo Nieira'
        required: True
        description: Name of the Professor
     
@@ -118,3 +120,51 @@ def read_professor_by_id(id):
             
     """
     return get_professor_by_id(id)
+
+
+@bp_professor.route("/delete-professor-by-name/<name>", methods=["DELETE"])
+def delete_professor_given_name(name):
+    """
+    Delete professor
+    ---
+    tags:
+     - Professor
+
+    parameters:
+     - name: name
+       in: path
+       type: string
+       default: 'Ricardo Nieira'
+       required: True
+       description: name of the professor
+    
+    responses:
+        200:
+            description: professor was deleted
+            
+    """
+    return delete_professor_by_name(name)
+
+
+@bp_professor.route("/delete-professor-by-id/<id>", methods=["DELETE"])
+def delete_professor_given_id(id):
+    """
+    Delete professor
+    ---
+    tags:
+     - Professor
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the professor
+    
+    responses:
+        200:
+            description: professor was deleted
+            
+    """
+    return delete_professor_by_id(id)
