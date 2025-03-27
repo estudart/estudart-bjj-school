@@ -25,9 +25,15 @@ def register_student():
      - name: name
        in: query
        type: string
-       default: 'Erico'
+       default: 'Erico Correia Studart'
        required: True
        description: Name of the student
+     - name: nick_name
+       in: query
+       type: string
+       default: 'Bigode'
+       required: True
+       description: Nickname of the student
      - name: age
        in: query
        type: integer
@@ -73,7 +79,7 @@ def read_student_by_name(name):
      - name: name
        in: path
        type: string
-       default: 'Erico'
+       default: 'Erico Correia Studart'
        required: True
        description: Name of the student
     
@@ -121,7 +127,7 @@ def delete_student_given_name(name):
      - name: name
        in: path
        type: string
-       default: 1
+       default: 'Erico Correia Studart'
        required: True
        description: name of the student
     
