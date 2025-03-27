@@ -13,3 +13,9 @@ class Student(db.Model):
 
     def __repr__(self):
         return f"<Student {self.name}>"
+    
+    def to_dict(self):
+        return {
+            column.name: getattr(self, column.name) 
+            for column in self.__table__.columns
+        }
