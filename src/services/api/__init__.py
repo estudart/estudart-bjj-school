@@ -2,7 +2,7 @@ from flask import Flask
 from flasgger import Swagger
 from flask_cors import CORS
 
-from services.api.routes import bp_student, bp_professor
+from services.api.routes import bp_student, bp_professor, bp_class
 from utils.extensions import db
 
 def create_app():
@@ -51,6 +51,7 @@ def create_app():
 
     app.register_blueprint(bp_student, url_prefix="/api/v1")
     app.register_blueprint(bp_professor, url_prefix="/api/v1")
+    app.register_blueprint(bp_class, url_prefix="/api/v1")
 
     return app
 

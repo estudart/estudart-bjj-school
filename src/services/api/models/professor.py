@@ -1,7 +1,12 @@
 from sqlalchemy import Integer, String
+
 from utils.extensions import db
 
+
+
 class Professor(db.Model):
+    __tablename__ = "professors"
+
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(100), nullable=False)
     nick_name = db.Column(String(100), nullable=True)
