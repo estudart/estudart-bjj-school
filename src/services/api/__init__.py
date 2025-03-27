@@ -3,6 +3,7 @@ from flasgger import Swagger
 from flask_cors import CORS
 
 from services.api.routes import bp_student, bp_professor, bp_class
+from services.api.models.student_class import StudentClasses
 from utils.extensions import db
 
 def create_app():
