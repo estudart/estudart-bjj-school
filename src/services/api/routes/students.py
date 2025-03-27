@@ -2,7 +2,11 @@ import logging
 
 from flask import Blueprint, request as req
 
-from services.api.controllers.student import post_student
+from services.api.controllers.student import (
+    post_student, 
+    get_student_by_name,
+    get_student_by_id
+)
 
 bp_student = Blueprint("student", 
                        __name__)
@@ -53,3 +57,51 @@ def register_student():
     logging.info(f"Received data request from user: {data}")
 
     return post_student(data)
+
+
+@bp_student.route("/get-student-by-name/<name>", methods=["GET"])
+def read_student_by_name(name):
+    """
+    Register Student
+    ---
+    tags:
+     - Student
+
+    parameters:
+     - name: name
+       in: path
+       type: string
+       default: 'Erico'
+       required: True
+       description: Name of the student
+    
+    responses:
+        200:
+            description: New student was registered
+            
+    """
+    return get_student_by_name(name)
+
+
+@bp_student.route("/get-student-by-id/<id>", methods=["GET"])
+def read_student_by_id(id):
+    """
+    Register Student
+    ---
+    tags:
+     - Student
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the student
+    
+    responses:
+        200:
+            description: New student was registered
+            
+    """
+    return get_student_by_id(id)
