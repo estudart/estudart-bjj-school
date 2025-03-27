@@ -12,3 +12,14 @@ class Professor(db.Model):
 
     def __repr__(self):
         return f"<Professor {self.name}>"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "nick_name": self.nick_name,
+            "age": self.age,
+            "belt": self.belt,
+            "stripes": self.stripes,
+            "black_belt_under_who": self.black_belt_under_who
+        }
