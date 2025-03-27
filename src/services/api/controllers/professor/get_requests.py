@@ -14,7 +14,7 @@ def get_professor_by_name(name):
             return make_response(
                 {
                     "message": "Professor was not found in database"
-                }, 200)
+                }, 404)
         
         dict_professor = search_professor.to_dict()
         logging.info(
@@ -41,7 +41,7 @@ def get_professor_by_id(id):
             return make_response(
                 {
                     "message": "Professor was not found in database"
-                }, 200)
+                }, 404)
         
         dict_professor = search_professor.to_dict()
         logging.info(
