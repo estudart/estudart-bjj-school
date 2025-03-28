@@ -1,3 +1,4 @@
 from .post_requests import post_professor
 from .get_requests import get_professor_by_name, get_professor_by_id
 from .delete_requests import delete_professor_by_name, delete_professor_by_id
+from .update_requests import update_professor_data
