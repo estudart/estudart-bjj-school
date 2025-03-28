@@ -3,16 +3,16 @@ import logging
 import requests
 
 from utils.config import (
-    SLACK_BOT_TOKEN,
-    SLACK_API_URL
+    TELEGRAM_BOT_TOKEN,
+    TELEGRAM_API_URL
 )
 
 
 
 class TelegramAdapter:
     def __init__(self,
-                 url=SLACK_API_URL,
-                 token=SLACK_BOT_TOKEN):
+                 url=TELEGRAM_API_URL,
+                 token=TELEGRAM_BOT_TOKEN):
         
         self.token = token
         self.url = url
