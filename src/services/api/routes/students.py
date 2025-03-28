@@ -167,7 +167,7 @@ def delete_student_given_id(id):
 @bp_student.route("/update-student/<id>", methods=["PUT"])
 def put_student(id):
     """
-    Register Student
+    Update Student
     ---
     tags:
      - Student
@@ -212,7 +212,7 @@ def put_student(id):
     
     responses:
         200:
-            description: New student was registered
+            description: student was updated
             
     """
     try:
