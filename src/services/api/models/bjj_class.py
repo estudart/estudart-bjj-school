@@ -12,7 +12,7 @@ class BJJClass(db.Model):
     professor_id = db.Column(Integer, ForeignKey("professors.id"), 
                              nullable=False)
 
-    professor = db.relationship("Professor", 
+    professors = db.relationship("Professor", 
                                 back_populates="classes")
     students = db.relationship("Student", 
                                secondary="students_classes", 

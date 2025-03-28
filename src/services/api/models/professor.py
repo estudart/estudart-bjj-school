@@ -15,6 +15,8 @@ class Professor(db.Model):
     stripes = db.Column(Integer, nullable=False)
     black_belt_under_who = db.Column(String(100), nullable=False)
 
+    classes = db.relationship("BJJClass", back_populates="professors")
+
     def __repr__(self):
         return f"<Professor {self.name}>"
     
