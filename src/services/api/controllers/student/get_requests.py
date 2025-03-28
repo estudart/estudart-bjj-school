@@ -5,6 +5,8 @@ from flask import make_response
 from utils.extensions import db
 from services.api.models.student import Student
 
+
+
 def get_student_by_name(name):
     try:
         search_student = (
@@ -24,6 +26,7 @@ def get_student_by_name(name):
                 "message": "Student was found",
                 "data": dict_student
             }, 200)
+    
     except Exception as err:
         logging.error(f"Could not find student, reason: {err}")
         return make_response(

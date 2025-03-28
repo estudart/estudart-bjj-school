@@ -7,7 +7,8 @@ from services.api.controllers.student import (
     get_student_by_name,
     get_student_by_id,
     delete_student_by_name,
-    delete_student_by_id
+    delete_student_by_id,
+    update_student_data
 )
 
 bp_student = Blueprint("student", 
@@ -161,3 +162,63 @@ def delete_student_given_id(id):
             
     """
     return delete_student_by_id(id)
+
+
+@bp_student.route("/update-student/<id>", methods=["PUT"])
+def put_student(id):
+    """
+    Register Student
+    ---
+    tags:
+     - Student
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the student
+     - name: name
+       in: query
+       type: string
+       default: 'Erico Correia Studart'
+       required: False
+       description: Name of the student
+     - name: nick_name
+       in: query
+       type: string
+       default: 'Bigode'
+       required: False
+       description: Nickname of the student
+     - name: age
+       in: query
+       type: integer
+       default: 27
+       required: False
+       description: Age of the student
+     - name: belt
+       in: query
+       type: string
+       default: 'Purple'
+       required: False
+       description: Belt of the student
+     - name: stripes
+       in: query
+       type: integer
+       default: 2
+       required: False
+       description: Stripes in the belt
+    
+    responses:
+        200:
+            description: New student was registered
+            
+    """
+    try:
+        data = req.json()
+    except:
+        data = req.args.to_dict()
+    logging.info(f"Received data request from user: {data}")
+
+    return update_student_data(id, data)
