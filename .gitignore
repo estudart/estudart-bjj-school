@@ -9,4 +9,4 @@ __pycache__/
 src/instance/
 
 # Ignore keys
-src/utils/config
+src/utils/config.py
