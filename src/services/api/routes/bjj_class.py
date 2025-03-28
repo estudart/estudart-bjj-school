@@ -8,7 +8,8 @@ from services.api.controllers.bjj_class import (
     get_all_classes,
     post_class,
     add_student_to_class,
-    delete_class_by_id
+    delete_class_by_id,
+    update_bjj_class_data
 )
 
 
@@ -32,12 +33,12 @@ def register_class():
        default: '2025-02-27T11:00:00'
        required: True
        description: Date of the class
-     - name: class_id
+     - name: professor_id
        in: query
        type: integer
        default: 1
        required: True
-       description: Id of the class that gave the class
+       description: Id of the professor that gave the class
     
     responses:
         200:
@@ -181,4 +182,46 @@ def delete_class_given_id(id):
             
     """
     return delete_class_by_id(id)
+
+
+@bp_class.route("/update-class/<id>", methods=["PUT"])
+def put_class(id):
+    """
+    Update Class
+    ---
+    tags:
+     - Class
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Date of the class
+     - name: date
+       in: query
+       type: string
+       default: '2025-02-27T11:00:00'
+       required: False
+       description: Date of the class
+     - name: professor_id
+       in: query
+       type: integer
+       default: 1
+       required: False
+       description: Id of the professor that gave the class
+    
+    responses:
+        200:
+            description: New Class was registered
+            
+    """
+    try:
+        data = req.json()
+    except Exception as err:
+        data = req.args.to_dict()
+    logging.info(f"Received class request from user: {data}")
+
+    return update_bjj_class_data(id, data)
         
