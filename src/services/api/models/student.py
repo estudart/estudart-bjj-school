@@ -15,7 +15,9 @@ class Student(db.Model):
     age = db.Column(Integer, nullable=False)
     belt = db.Column(String(30), nullable=False)
     stripes = db.Column(Integer, nullable=False)
-    date_of_register = db.Column(DateTime, default=datetime.now)
+    created_at = db.Column(DateTime, default=datetime.now)
+    updated_at = db.Column(DateTime, default=datetime.now, 
+                           onupdate=datetime.now)
 
     classes = db.relationship(
         "BJJClass", 
