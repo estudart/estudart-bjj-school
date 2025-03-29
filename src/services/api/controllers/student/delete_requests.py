@@ -20,6 +20,7 @@ def delete_student_by_id(id):
         
         db.session.delete(search_delete_student)
         db.session.commit()
+        logger.info(f"Student with id: {id} was deleted")
         return make_response(
             {
                 "message": f"Student with id: {id} was deleted"
