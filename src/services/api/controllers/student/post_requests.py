@@ -3,7 +3,8 @@ import logging
 from flask import make_response
 
 from services.api.models.student import Student
-from utils.extensions import db, telegram_adapter
+from services.celery.tasks import send_message_on_chat
+from utils.extensions import db
 
 
 
@@ -12,9 +13,10 @@ def post_student(data):
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
-        telegram_adapter.send_message(
+        task = send_message_on_chat.delay(
             f"New student registered: {data}"
         )
+        logging.info(f"{task.id}")
         return make_response(
             {"message": "Successfully added new student"}, 
             200)
