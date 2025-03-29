@@ -1,5 +1,3 @@
-import logging
-
 import requests
 
 from utils.config import (
@@ -11,13 +9,15 @@ from utils.config import (
 
 class TelegramAdapter:
     def __init__(self,
+                 logger,
                  url=TELEGRAM_API_URL,
                  token=TELEGRAM_BOT_TOKEN):
         
+        self.logger = logger
         self.token = token
         self.url = url
+        
 
-    
     def send_message(self, text_message, chat_id="7149973377"):
         try:
             response = requests.post(
@@ -31,10 +31,10 @@ class TelegramAdapter:
             data = response.json()
 
             if response.status_code == 200:
-                logger.info(
+                self.logger.info(
                     f"Message was sent to telegram: {data}")
         except Exception as err:
-            logger.error(
+            self.logger.error(
                 f"Could not send message to Telegram, reason: {err}"
             )
     
