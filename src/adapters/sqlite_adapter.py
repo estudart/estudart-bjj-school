@@ -1,11 +1,10 @@
 import sqlite3
 import logging
 
-from utils.config import DATABASE
 
 class SqliteAdapter:
     def __init__(self, 
-                 path=DATABASE):
+                 path):
         self.path = path
 
         self.db_connection = None
