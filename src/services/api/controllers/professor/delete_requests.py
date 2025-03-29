@@ -1,9 +1,8 @@
-import logging
-
 from flask import make_response
 
-from utils.extensions import db
+from utils.extensions import db, logger
 from services.api.models.professor import Professor
+
 
 
 def delete_professor_by_id(id):
@@ -27,7 +26,7 @@ def delete_professor_by_id(id):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not delete professor, reason: {err}")
+        logger.error(f"Could not delete professor, reason: {err}")
         return make_response(
             {
                 "message": f"Could not delete professor, reason: {err}"
@@ -55,7 +54,7 @@ def delete_professor_by_name(name):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not delete professor, reason: {err}")
+        logger.error(f"Could not delete professor, reason: {err}")
         return make_response(
             {
                 "message": f"Could not delete professor, reason: {err}"

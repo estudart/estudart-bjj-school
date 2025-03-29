@@ -1,7 +1,6 @@
-import logging
-
 from flask import Blueprint, request as req
 
+from utils.extensions import logger
 from services.api.controllers.bjj_class import (
     get_class_by_id,
     get_students_by_class_id,
@@ -11,8 +10,6 @@ from services.api.controllers.bjj_class import (
     delete_class_by_id,
     update_bjj_class_data
 )
-
-
 
 bp_class = Blueprint("class",
                      __name__)
@@ -49,7 +46,7 @@ def register_class():
         data = req.json()
     except Exception as err:
         data = req.args.to_dict()
-    logging.info(f"Received class request from user: {data}")
+    logger.info(f"Received class request from user: {data}")
 
     return post_class(data)
 
@@ -91,7 +88,7 @@ def insert_student_to_class():
         data = req.json()
     except Exception as err:
         data = req.args.to_dict()
-    logging.info(f"Received class request from user: {data}")
+    logger.info(f"Received class request from user: {data}")
 
     return add_student_to_class(data)
 
@@ -221,7 +218,7 @@ def put_class(id):
         data = req.json()
     except Exception as err:
         data = req.args.to_dict()
-    logging.info(f"Received class request from user: {data}")
+    logger.info(f"Received class request from user: {data}")
 
     return update_bjj_class_data(id, data)
         

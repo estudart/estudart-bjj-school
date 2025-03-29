@@ -1,7 +1,6 @@
-import logging
-
 from flask import Blueprint, request as req
 
+from utils.extensions import logger
 from services.api.controllers.professor import (
     post_professor, 
     get_professor_by_name, 
@@ -71,7 +70,7 @@ def register_professor():
         data = req.json()
     except:
         data = req.args.to_dict()
-    logging.info(f"Received data request from user: {data}")
+    logger.info(f"Received data request from user: {data}")
 
     return post_professor(data)
 
@@ -232,6 +231,6 @@ def put_professor(id):
         data = req.json()
     except:
         data = req.args.to_dict()
-    logging.info(f"Received data request from user: {data}")
+    logger.info(f"Received data request from user: {data}")
 
     return update_professor_data(id, data)

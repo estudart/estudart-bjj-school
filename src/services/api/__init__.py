@@ -3,7 +3,6 @@ from flasgger import Swagger
 from flask_cors import CORS
 
 from services.api.routes import bp_student, bp_professor, bp_class
-from services.api.models.student_class import StudentClasses
 from utils.extensions import db
 
 def create_app():
@@ -11,6 +10,8 @@ def create_app():
     CORS(app)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    app.config['CELERY_BROKER_URL'] = "redis://localhost:6379/0"
+    app.config['CELERY_RESULT_BACKEND'] = "redis://localhost:6379/0"
 
     db.init_app(app)
 

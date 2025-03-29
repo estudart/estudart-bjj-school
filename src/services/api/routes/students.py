@@ -1,7 +1,6 @@
-import logging
-
 from flask import Blueprint, request as req
 
+from utils.extensions import logger
 from services.api.controllers.student import (
     post_student, 
     get_student_by_name,
@@ -63,7 +62,7 @@ def register_student():
         data = req.json()
     except:
         data = req.args.to_dict()
-    logging.info(f"Received data request from user: {data}")
+    logger.info(f"Received data request from user: {data}")
 
     return post_student(data)
 
@@ -219,6 +218,6 @@ def put_student(id):
         data = req.json()
     except:
         data = req.args.to_dict()
-    logging.info(f"Received data request from user: {data}")
+    logger.info(f"Received data request from user: {data}")
 
     return update_student_data(id, data)

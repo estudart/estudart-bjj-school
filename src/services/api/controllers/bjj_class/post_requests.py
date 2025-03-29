@@ -1,11 +1,10 @@
-import logging
 from datetime import datetime
 
 from flask import make_response
 
 from services.api.models.bjj_class import BJJClass
 from services.api.models.student_class import StudentClasses
-from utils.extensions import db
+from utils.extensions import db, logger
 
 
 
@@ -25,7 +24,7 @@ def post_class(data):
             {"message": f"Inavlid json: {err}"}, 
             400)
     except Exception as err:
-        logging.error(err)
+        logger.error(err)
         return make_response(
             {"message": f"Failed to add new class: {err}"}, 
             500)
@@ -44,6 +43,7 @@ def add_student_to_class(data):
             {"message": f"Inavlid json: {err}"}, 
             400)
     except Exception as err:
+        logger.error(f"{err}")
         return make_response(
             {"message": f"Failed to add student to class: {err}"}, 
             500)
