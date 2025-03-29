@@ -3,13 +3,18 @@ import logging
 from flask import make_response
 
 from services.api.models.student import Student
-from utils.extensions import db
+from utils.extensions import db, telegram_adapter
+
+
 
 def post_student(data):
     try:
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
+        telegram_adapter.send_message(
+            f"New student registered: {data}"
+        )
         return make_response(
             {"message": "Successfully added new student"}, 
             200)
