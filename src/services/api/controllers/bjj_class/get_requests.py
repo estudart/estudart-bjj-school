@@ -1,11 +1,11 @@
-import logging
-
 from flask import make_response
 
 from services.api.models.bjj_class import BJJClass
 from services.api.models.student_class import StudentClasses
 from services.api.models.student import Student
-from utils.extensions import db
+from utils.extensions import db, logger
+
+
 
 
 
@@ -23,7 +23,7 @@ def get_class_by_id(id):
                 }, 404)
         
         dict_class = search_class.to_dict()
-        logging.info(
+        logger.info(
             f"class was found, {dict_class}")
         return make_response(
             {
@@ -32,7 +32,7 @@ def get_class_by_id(id):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find class, reason: {err}")
+        logger.error(f"Could not find class, reason: {err}")
         return make_response(
             {
                 "message": f"Could not find class, reason: {err}"
@@ -52,7 +52,7 @@ def get_all_classes():
                 }, 404)
         
         dict_class = [search_class.to_dict() for search_class in search_classes]
-        logging.info(
+        logger.info(
             f"class was found, {dict_class}")
         return make_response(
             {
@@ -61,7 +61,7 @@ def get_all_classes():
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find classes, reason: {err}")
+        logger.error(f"Could not find classes, reason: {err}")
         return make_response(
             {
                 "message": f"Could not find classes, reason: {err}"
@@ -83,7 +83,7 @@ def get_students_by_class_id(class_id):
                 }, 404)
         
         dict_students = [search_student.to_dict() for search_student in search_students]
-        logging.info(
+        logger.info(
             f"students were found, {dict_students}")
         return make_response(
             {
@@ -92,7 +92,7 @@ def get_students_by_class_id(class_id):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find class, reason: {err}")
+        logger.error(f"Could not find class, reason: {err}")
         return make_response(
             {
                 "message": f"Could not find class, reason: {err}"

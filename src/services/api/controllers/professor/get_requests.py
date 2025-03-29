@@ -1,9 +1,8 @@
-import logging
-
 from flask import make_response
 
-from utils.extensions import db
+from utils.extensions import db, logger
 from services.api.models.professor import Professor
+
 
 
 def get_professor_by_name(name):
@@ -17,7 +16,7 @@ def get_professor_by_name(name):
                 }, 404)
         
         dict_professor = search_professor.to_dict()
-        logging.info(
+        logger.info(
             f"Professor was found, {dict_professor}")
         return make_response(
             {
@@ -26,7 +25,7 @@ def get_professor_by_name(name):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find professor, reason: {err}")
+        logger.error(f"Could not find professor, reason: {err}")
         return make_response(
             {
                 "message": f"Could not find professor, reason: {err}"
@@ -44,7 +43,7 @@ def get_professor_by_id(id):
                 }, 404)
         
         dict_professor = search_professor.to_dict()
-        logging.info(
+        logger.info(
             f"Professor was found, {dict_professor}")
         return make_response(
             {
@@ -53,7 +52,7 @@ def get_professor_by_id(id):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find professor, reason: {err}")
+        logger.error(f"Could not find professor, reason: {err}")
         return make_response(
             {
                 "message": f"Could not find professor, reason: {err}"

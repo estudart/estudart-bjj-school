@@ -1,8 +1,6 @@
-import logging
-
 from flask import make_response
 
-from utils.extensions import db
+from utils.extensions import db, logger
 from services.api.models.bjj_class import BJJClass
 
 
@@ -27,7 +25,7 @@ def update_bjj_class_data(id, data):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find bjj_class, reason: {err}")
+        logger.error(f"Could not find bjj_class, reason: {err}")
         return make_response(
             {
                 "message": "Could not find bjj_class"
