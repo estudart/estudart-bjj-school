@@ -1,4 +1,6 @@
-from sqlalchemy import Integer, String
+from datetime import datetime
+
+from sqlalchemy import Integer, String, DateTime
 
 from utils.extensions import db
 
@@ -14,6 +16,7 @@ class Professor(db.Model):
     belt = db.Column(String, nullable=False)
     stripes = db.Column(Integer, nullable=False)
     black_belt_under_who = db.Column(String(100), nullable=False)
+    date_of_register = db.Column(DateTime, default=datetime.now)
 
     classes = db.relationship("BJJClass", back_populates="professors")
 
