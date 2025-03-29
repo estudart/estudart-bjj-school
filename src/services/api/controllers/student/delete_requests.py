@@ -1,9 +1,8 @@
-import logging
-
 from flask import make_response
 
-from utils.extensions import db
+from utils.extensions import db, logger
 from services.api.models.student import Student
+
 
 
 def delete_student_by_id(id):
@@ -21,13 +20,14 @@ def delete_student_by_id(id):
         
         db.session.delete(search_delete_student)
         db.session.commit()
+        logger.info(f"Student with id: {id} was deleted")
         return make_response(
             {
                 "message": f"Student with id: {id} was deleted"
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not delete student, reason: {err}")
+        logger.error(f"Could not delete student, reason: {err}")
         return make_response(
             {
                 "message": f"Could not delete student, reason: {err}"
@@ -55,7 +55,7 @@ def delete_student_by_name(name):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not delete student, reason: {err}")
+        logger.error(f"Could not delete student, reason: {err}")
         return make_response(
             {
                 "message": f"Could not delete student, reason: {err}"

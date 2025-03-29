@@ -1,8 +1,6 @@
-import logging
-
 from services.api import create_app
 
-logging.basicConfig(level="INFO")
+
 
 if __name__ == '__main__':
     app = create_app()

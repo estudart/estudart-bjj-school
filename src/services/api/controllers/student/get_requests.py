@@ -1,8 +1,6 @@
-import logging
-
 from flask import make_response
 
-from utils.extensions import db
+from utils.extensions import db, logger
 from services.api.models.student import Student
 
 
@@ -28,7 +26,7 @@ def get_student_by_name(name):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not find student, reason: {err}")
+        logger.error(f"Could not find student, reason: {err}")
         return make_response(
             {
                 "message": "Could not find student"
@@ -55,7 +53,7 @@ def get_student_by_id(id):
                 "data": dict_student
             }, 200)
     except Exception as err:
-        logging.error(f"Could not find student, reason: {err}")
+        logger.error(f"Could not find student, reason: {err}")
         return make_response(
             {
                 "message": "Could not find student"

@@ -1,9 +1,7 @@
-import logging
-
 from flask import make_response
 
 from services.api.models.bjj_class import BJJClass
-from utils.extensions import db
+from utils.extensions import db, logger
 
 
 
@@ -28,7 +26,7 @@ def delete_class_by_id(id):
             }, 200)
     
     except Exception as err:
-        logging.error(f"Could not delete class, reason: {err}")
+        logger.error(f"Could not delete class, reason: {err}")
         return make_response(
             {
                 "message": f"Could not delete class, reason: {err}"
