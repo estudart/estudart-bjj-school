@@ -14,6 +14,7 @@ class LoggerAdapter:
     def _start_logger(self):
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(self.level)
+
         formatter = logging.Formatter(
             '%(asctime)s - %(levelname)s - %(message)s')
         handler = logging.StreamHandler()

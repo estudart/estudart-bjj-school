@@ -12,7 +12,7 @@ def post_student(data):
         db.session.add(new_student)
         db.session.commit()
         task = send_welcome_message_on_chat.delay(data.get("name"))
-        logger.info(f"{task.id}")
+        logger.debug(f"{task.id}")
         return make_response(
             {"message": "Successfully added new student"}, 
             200)
