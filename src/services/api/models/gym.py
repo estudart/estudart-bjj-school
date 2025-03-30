@@ -43,9 +43,9 @@ class Gym(db.Model):
     parking_available = db.Column(Boolean, nullable=False)
 
     # Relantionship
-    classes = db.relationship("BJJClass", back_populates="gyms")
-    professors = db.relationship("Professor", back_populates="gyms")
-    students = db.relationship("Students", back_populates="gyms")
+    classes = db.relationship("BJJClass", back_populates="gym")
+    professors = db.relationship("Professor", back_populates="gym")
+    students = db.relationship("Student", back_populates="gym")
 
     def __repr__(self):
         return f"<Gym {self.name}"

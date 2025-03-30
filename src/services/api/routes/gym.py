@@ -114,6 +114,11 @@ def register_gym():
         data = req.json()
     except:
         data = req.args.to_dict()
+
+    for key, value in data.items():
+        if isinstance(value, str) and value.lower() in ['true', 'false']:
+            data[key] = value.lower() == 'true'
+
     logger.info(f"Received data request from user: {data}")
 
     return post_gym(data)
