@@ -60,6 +60,12 @@ def register_professor():
        default: 'Murilo Bustamante'
        required: True
        description: Who gave the professor the black belt
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: True
+       description: Gym in which professor gives classes
     
     responses:
         200:
@@ -221,6 +227,12 @@ def put_professor(id):
        default: 'Murilo Bustamante'
        required: False
        description: Who gave the professor the black belt
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: False
+       description: Gym in which professor gives classes
     
     responses:
         200:

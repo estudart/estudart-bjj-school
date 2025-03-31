@@ -36,6 +36,12 @@ def register_class():
        default: 1
        required: True
        description: Id of the professor that gave the class
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: True
+       description: Gym in which the class happened
     
     responses:
         200:
@@ -208,6 +214,12 @@ def put_class(id):
        default: 1
        required: False
        description: Id of the professor that gave the class
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: False
+       description: Gym in which the class happened
     
     responses:
         200:

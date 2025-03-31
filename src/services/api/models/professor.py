@@ -1,6 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import (
+    Integer, String, DateTime,
+    ForeignKey
+)
 
 from utils.extensions import db
 
@@ -19,7 +22,12 @@ class Professor(db.Model):
     created_at = db.Column(DateTime, default=datetime.now)
     updated_at = db.Column(DateTime, default=datetime.now, 
                            onupdate=datetime.now)
-
+    
+    # Relationship
+    gym_id = db.Column(Integer, ForeignKey("gyms.id"),
+                       nullable=False)
+    
+    gym = db.relationship("Gym", back_populates="professors")
     classes = db.relationship("BJJClass", back_populates="professors")
 
     def __repr__(self):
