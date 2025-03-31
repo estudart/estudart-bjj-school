@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import make_response
 
 from utils.extensions import db, logger
@@ -7,6 +9,9 @@ from services.api.models.bjj_class import BJJClass
 
 def update_bjj_class_data(id, data):
     try:
+        data["date"] = datetime.strptime(
+            data["date"],
+            '%Y-%m-%dT%H:%M:%S')
         update_bjj_class = (
             db.session.query(BJJClass)
             .filter(BJJClass.id==id)
