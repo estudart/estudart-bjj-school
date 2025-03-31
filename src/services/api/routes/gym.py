@@ -5,6 +5,8 @@ from services.api.controllers.gym import (
     post_gym, 
     get_gym_by_name, 
     get_gym_by_id,
+    get_students_by_gym,
+    get_professors_by_gym,
     delete_gym_by_name,
     delete_gym_by_id,
     update_gym_data
@@ -144,6 +146,53 @@ def read_gym_by_name(name):
             description: Gym data retrieved successfully
     """
     return get_gym_by_name(name)
+
+
+@bp_gym.route("/get-students-by-gym/<id>")
+def read_students_by_gym(id):
+    """
+    Get Students on specific gym
+    ---
+    tags:
+     - Gym
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the gym
+    
+    responses:
+        200:
+            description: Students data retrieved successfully
+    """
+    return get_students_by_gym(id)
+
+
+@bp_gym.route("/get-professors-by-gym/<id>")
+def read_professors_by_gym(id):
+    """
+    Get professors on specific gym
+    ---
+    tags:
+     - Gym
+
+    parameters:
+     - name: id
+       in: path
+       type: integer
+       default: 1
+       required: True
+       description: Id of the gym
+    
+    responses:
+        200:
+            description: professors data retrieved successfully
+    """
+    return get_professors_by_gym(id)
+
 
 @bp_gym.route("/get-gym-by-id/<id>", methods=["GET"])
 def read_gym_by_id(id):
