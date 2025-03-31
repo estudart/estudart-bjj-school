@@ -52,6 +52,12 @@ def register_student():
        default: 2
        required: True
        description: Stripes in the belt
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: True
+       description: Gym in which the student is registered
     
     responses:
         200:
@@ -208,6 +214,12 @@ def put_student(id):
        default: 2
        required: False
        description: Stripes in the belt
+     - name: gym_id
+       in: query
+       type: integer
+       default: 2
+       required: False
+       description: Gym in which the student is registered
     
     responses:
         200:

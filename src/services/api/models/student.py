@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import Integer, String, DateTime, ForeignKey
 
 from utils.extensions import db 
 
@@ -19,6 +19,10 @@ class Student(db.Model):
     updated_at = db.Column(DateTime, default=datetime.now, 
                            onupdate=datetime.now)
 
+    # Relationship
+    gym_id = db.Column(Integer, ForeignKey("gyms.id"),
+                       nullable=False)
+    gym = db.relationship("Gym", back_populates="students")
     classes = db.relationship(
         "BJJClass", 
         secondary="students_classes", 

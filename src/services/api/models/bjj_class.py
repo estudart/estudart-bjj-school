@@ -9,9 +9,15 @@ class BJJClass(db.Model):
 
     id = db.Column(Integer, primary_key=True)
     date = db.Column(DateTime, nullable=False)
+
+    # Relantionship
     professor_id = db.Column(Integer, ForeignKey("professors.id"), 
                              nullable=False)
-
+    gym_id = db.Column(Integer, ForeignKey("gyms.id"),
+                       nullable=False)
+    
+    gym = db.relationship("Gym",
+                           back_populates="classes")
     professors = db.relationship("Professor", 
                                 back_populates="classes")
     students = db.relationship("Student", 
