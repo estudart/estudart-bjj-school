@@ -47,3 +47,16 @@ class TelegramAdapter:
         )
         self.send_message(text_message)
 
+    
+    def send_class_alert_message(self, 
+                                 student_name, 
+                                 bjj_class_address,
+                                 professor_name,
+                                 time_until_class):
+        text_message = (
+            f"Hi, {student_name}\n"
+            f"You have a bjj class with professor {professor_name}"
+            f"at the address {bjj_class_address} string in {time_until_class}"
+        )
+        self.send_message(text_message)
+
