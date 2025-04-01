@@ -11,8 +11,8 @@ def create_app():
     CORS(app)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-    app.config['CELERY_BROKER_URL'] = "redis://localhost:6379/0"
-    app.config['CELERY_RESULT_BACKEND'] = "redis://localhost:6379/0"
+    app.config['broker_url'] = "redis://localhost:6379/0"
+    app.config['result_backend'] = "redis://localhost:6379/0"
 
     db.init_app(app)
 

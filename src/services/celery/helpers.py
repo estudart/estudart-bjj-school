@@ -9,10 +9,7 @@ def class_reminders():
             .all()
         )
 
-        bjj_class_id_list = []
-
-        for bjj_class in search_classes:
-            bjj_class_id_list.append(bjj_class.to_dict()["id"])
+        bjj_class_id_list = [bjj_class.to_dict() for bjj_class in search_classes]
 
         logger.info(f"Classes to send message are {bjj_class_id_list}") 
 

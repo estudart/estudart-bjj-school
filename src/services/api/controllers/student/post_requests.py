@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask import make_response
 
 from services.api.models.student import Student
@@ -8,10 +10,14 @@ from utils.extensions import db, logger
 
 def post_student(data):
     try: 
+        run_at = datetime.now() + timedelta(seconds=20)
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
-        task = send_welcome_message_on_chat.delay(data.get("name"))
+        task = send_welcome_message_on_chat.apply_async(
+            args=(data.get("name"),), 
+            countdown=20  # Executes after 20 seconds
+        )
         logger.debug(f"{task.id}")
         check_and_send_reminders.delay()
         return make_response(
