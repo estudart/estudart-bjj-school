@@ -1,10 +1,11 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 from flask import make_response
 
 from services.api.models.bjj_class import BJJClass
 from services.api.models.student_class import StudentClasses
 from utils.extensions import db, logger
+from services.celery.tasks import schedule_reminder_for_class
 
 
 
@@ -35,6 +36,25 @@ def add_student_to_class(data):
         new_student_class = StudentClasses(**data)
         db.session.add(new_student_class)
         db.session.commit()
+
+        time_of_class = (
+            db.session.query(BJJClass)
+            .filter(BJJClass.id==data["class_id"])
+            .first()
+        )
+
+        time_before_class_in_minutes = 10
+
+        eta = time_of_class.date + timedelta(hours=3) - timedelta(minutes=time_before_class_in_minutes)
+
+        schedule_reminder_for_class.apply_async(
+            (
+                data["student_id"],
+                data["class_id"],
+                time_before_class_in_minutes
+            ),
+            eta=eta
+        )
         return make_response(
             {"message": "Successfully added student to class"}, 
             200)

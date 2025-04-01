@@ -19,11 +19,13 @@ def make_celery(app):
                 return TaskBase.__call__(self, *args, **kwargs)
     celery.Task = ContextTask
 
-    celery.conf.beat_schedule = {
-        "run-my-task-every-10-seconds": {
-            "task": "services.celery.tasks.check_and_send_reminders",
-            "schedule": 10.0,  # Runs every 10 seconds
-        },
-    }
+    number_of_minutes = 1
+
+    # celery.conf.beat_schedule = {
+    #     "run-my-task-every-5-minutes": {
+    #         "task": "services.celery.tasks.check_and_send_reminders",
+    #         "schedule": 60.0 * number_of_minutes,  # Runs every x minutes
+    #     },
+    # }
 
     return celery

@@ -54,9 +54,10 @@ class TelegramAdapter:
                                  professor_name,
                                  time_until_class):
         text_message = (
-            f"Hi, {student_name}\n"
-            f"You have a bjj class with professor {professor_name}"
-            f"at the address {bjj_class_address} string in {time_until_class}"
+            f"Hello there, {student_name}.\n\n"
+            f"You have a bjj class with professor {professor_name} "
+            f"at the address {bjj_class_address} in {time_until_class} " 
+            f"{'minutes' if time_until_class > 1 else 'minute'}."
         )
         self.send_message(text_message)
 
