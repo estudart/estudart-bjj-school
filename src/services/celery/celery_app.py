@@ -1,12 +1,31 @@
 from celery import Celery
+from celery.schedules import crontab
 
-def make_celery():
+
+
+def make_celery(app):
     celery = Celery(
-        "tasks",
-        broker="redis://localhost:6379/0",
-        backend="redis://localhost:6379/0",
-        include=["services.celery.tasks"]
-    )
-    return celery
+        app.import_name, 
+        broker=app.config['broker_url'],
+        backend=app.config['result_backend'],
+        include=["services.celery.tasks"])
+    celery.conf.update(app.config)
 
-celery_service = make_celery()
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+
+    number_of_minutes = 1
+
+    # celery.conf.beat_schedule = {
+    #     "run-my-task-every-5-minutes": {
+    #         "task": "services.celery.tasks.check_and_send_reminders",
+    #         "schedule": 60.0 * number_of_minutes,  # Runs every x minutes
+    #     },
+    # }
+
+    return celery

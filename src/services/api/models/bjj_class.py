@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, DateTime, ForeignKey
+from sqlalchemy import Integer, DateTime, ForeignKey, Boolean
 
 from utils.extensions import db
 
@@ -9,6 +9,8 @@ class BJJClass(db.Model):
 
     id = db.Column(Integer, primary_key=True)
     date = db.Column(DateTime, nullable=False)
+
+    class_reminder_was_sent = db.Column(Boolean, default=False)
 
     # Relantionship
     professor_id = db.Column(Integer, ForeignKey("professors.id"), 

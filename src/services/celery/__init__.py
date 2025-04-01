@@ -1,1 +1,1 @@
-from .celery_app import celery_service
+from .celery_app import make_celery

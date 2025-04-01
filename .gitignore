@@ -10,3 +10,6 @@ src/instance/
 
 # Ignore keys
 src/utils/config.py
+
+# Ginore beat files
+src/celerybeat-schedule*
