@@ -4,16 +4,20 @@ from flask_cors import CORS
 
 from services.api.routes import bp_student, bp_professor, bp_class, bp_gym
 from utils.extensions import db
+from services.celery import make_celery
 
 def create_app():
     app = Flask(__name__)
     CORS(app)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-    app.config['CELERY_BROKER_URL'] = "redis://localhost:6379/0"
-    app.config['CELERY_RESULT_BACKEND'] = "redis://localhost:6379/0"
+    app.config['broker_url'] = "redis://localhost:6379/0"
+    app.config['result_backend'] = "redis://localhost:6379/0"
 
     db.init_app(app)
+
+    celery = make_celery(app)
+    celery.set_default()
 
     swagger_config = {
         "headers": [
@@ -56,5 +60,5 @@ def create_app():
     app.register_blueprint(bp_class, url_prefix="/api/v1")
     app.register_blueprint(bp_gym, url_prefix="/api/v1")
 
-    return app
+    return app, celery
 

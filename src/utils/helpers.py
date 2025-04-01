@@ -1,4 +1,6 @@
+from services.api import create_app
 
 
-def dict_helper(obj_list):
-    return {item: value for item, value in obj_list.__dict__.items()}
+
+app, celery = create_app()
+app.app_context().push()

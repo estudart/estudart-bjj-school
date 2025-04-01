@@ -7,11 +7,11 @@ from utils.extensions import db, logger
 
 
 def post_student(data):
-    try:
+    try: 
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
-        task = send_welcome_message_on_chat.delay(data.get("name"))
+        task = send_welcome_message_on_chat.delay(data["name"])
         logger.debug(f"{task.id}")
         return make_response(
             {"message": "Successfully added new student"}, 
