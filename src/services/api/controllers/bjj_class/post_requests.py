@@ -45,7 +45,11 @@ def add_student_to_class(data):
 
         time_before_class_in_minutes = 10
 
-        eta = time_of_class.date + timedelta(hours=3) - timedelta(minutes=time_before_class_in_minutes)
+        eta = (
+            time_of_class.date + 
+            timedelta(hours=3) - 
+            timedelta(minutes=time_before_class_in_minutes)
+        )
 
         schedule_reminder_for_class.apply_async(
             (
