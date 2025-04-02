@@ -11,8 +11,8 @@ def post_student(data):
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
-        # task = send_welcome_message_on_chat.delay(data["name"])
-        # logger.debug(f"{task.id}")
+        task = send_welcome_message_on_chat.delay(data["name"])
+        logger.debug(f"{task.id}")
         task = send_register_success_email.delay()
         logger.debug(f"{task.id}")
         return make_response(

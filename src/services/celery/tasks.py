@@ -24,7 +24,7 @@ def schedule_reminder_for_class(student_id,
 def send_register_success_email():
     sendgrid_adapter.send_email(send_to_email="erico.studart@hashdex.com",
                                 subject="TEST",
-                                html_content="<strong>This is a test email from Celery</strong>")
+                                html_content="<strong>This is a test email from SendGrid</strong>")
 
 
 @shared_task

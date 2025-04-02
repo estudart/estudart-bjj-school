@@ -18,7 +18,7 @@ class TelegramAdapter:
         self.url = url
         
 
-    def send_message(self, text_message, chat_id="7149973377"):
+    def send_message(self, text_message, chat_id="-4778490829"):
         try:
             response = requests.post(
                 url=f"{self.url}{self.token}/sendMessage",
@@ -42,7 +42,7 @@ class TelegramAdapter:
     def send_welcome_message(self, name):
         text_message = (
             f"Welcome to our team, {name}. "
-            "This is the gym's number, feel free to get in contact "
+            "This is the gym's group chat, feel free to get in contact "
             "with us if you have any doubts"
         )
         self.send_message(text_message)

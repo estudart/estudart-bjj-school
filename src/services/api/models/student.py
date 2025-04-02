@@ -15,6 +15,7 @@ class Student(db.Model):
     age = db.Column(Integer, nullable=False)
     belt = db.Column(String(30), nullable=False)
     stripes = db.Column(Integer, nullable=False)
+    email = db.Column(String(100), nullable=False)
     created_at = db.Column(DateTime, default=datetime.now)
     updated_at = db.Column(DateTime, default=datetime.now, 
                            onupdate=datetime.now)
