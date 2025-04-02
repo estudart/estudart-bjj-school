@@ -93,7 +93,7 @@ def send_class_reminder(student_id,
                 .first()
                 .to_dict()["name"]),
 
-                time_until_class=time_before_class                        
+            time_until_class=time_before_class                        
         )
 
     except Exception as err:

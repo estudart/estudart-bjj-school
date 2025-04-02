@@ -58,6 +58,12 @@ def register_student():
        default: 2
        required: True
        description: Gym in which the student is registered
+     - name: email
+       in: query
+       type: string
+       default: 'erico.studartdf@gmail.com'
+       required: True
+       description: Email of client
     
     responses:
         200:
@@ -220,6 +226,12 @@ def put_student(id):
        default: 2
        required: False
        description: Gym in which the student is registered
+     - name: email
+       in: query
+       type: string
+       default: 'erico.studartdf@gmail.com'
+       required: False
+       description: Email of client
     
     responses:
         200:
