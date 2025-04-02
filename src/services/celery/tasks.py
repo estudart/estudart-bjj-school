@@ -1,5 +1,5 @@
 from celery import shared_task
-from utils.extensions import telegram_adapter
+from utils.extensions import telegram_adapter, sendgrid_adapter
 from services.celery.helpers import class_reminders, send_class_reminder
 
 
@@ -19,6 +19,12 @@ def schedule_reminder_for_class(student_id,
                         class_id,
                         time_before_class)
 
+
+@shared_task
+def send_register_success_email():
+    sendgrid_adapter.send_email(send_to_email="erico.studart@hashdex.com",
+                                subject="TEST",
+                                html_content="<strong>This is a test email from Celery</strong>")
 
 
 @shared_task

@@ -1,7 +1,7 @@
 from flask import make_response
 
 from services.api.models.student import Student
-from services.celery.tasks import send_welcome_message_on_chat
+from services.celery.tasks import send_welcome_message_on_chat, send_register_success_email
 from utils.extensions import db, logger
 
 
@@ -11,7 +11,9 @@ def post_student(data):
         new_student = Student(**data)
         db.session.add(new_student)
         db.session.commit()
-        task = send_welcome_message_on_chat.delay(data["name"])
+        # task = send_welcome_message_on_chat.delay(data["name"])
+        # logger.debug(f"{task.id}")
+        task = send_register_success_email.delay()
         logger.debug(f"{task.id}")
         return make_response(
             {"message": "Successfully added new student"}, 
