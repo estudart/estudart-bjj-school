@@ -68,19 +68,14 @@ def send_class_reminder(student_id,
                         class_id,
                         time_before_class):
     try:
-        professor_id = (
+        bjj_class = (
             db.session.query(BJJClass)
             .filter(BJJClass.id==class_id)
             .first()
-            .to_dict()["professor_id"]
+            .to_dict()
         )
-
-        gym_id = (
-            db.session.query(BJJClass)
-            .filter(BJJClass.id==class_id)
-            .first()
-            .to_dict()["gym_id"]
-        )
+        professor_id = bjj_class["professor_id"]
+        gym_id = bjj_class["gym_id"]
 
         telegram_adapter.send_class_alert_message(
             student_name=(db.session.query(Student)
